@@ -1,0 +1,16 @@
+runtime: nodejs18
+
+instance_class: F1
+
+entrypoint: npm start
+
+env_variables:
+  PG_USER: "postgres"
+  PG_HOST: 34.101.191.54
+  PG_DATABASE: "staysharp_db"
+  PG_PASSWORD: ">.X9yV;6^*$l_(?/"
+  PG_PORT: "5432"
+
+automatic_scaling:
+  min_instances: 1
+  max_instances: 3
