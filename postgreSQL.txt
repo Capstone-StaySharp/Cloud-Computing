@@ -1,0 +1,25 @@
+sudo apt-get update
+sudo apt-get install postgresql-client
+
+psql -h 34.101.191.54 -U postgres -d staysharp_db -W -p 5432
+
+
+CREATE TABLE news (
+  id SERIAL PRIMARY KEY,
+  author VARCHAR(255),
+  title VARCHAR(255),
+  content TEXT,
+  urlToImage VARCHAR(255),
+  publishedAt TIMESTAMP
+);
+
+
+INSERT INTO news (author, title, content, urlToImage, publishedAt)
+VALUES
+  ('James Arthur', 'The Future of AI in Healthcare', 
+   'In this article, we explore the potential of AI technologies in improving healthcare outcomes. Artificial intelligence has the ability to revolutionize the healthcare industry by providing tools for predictive diagnostics, personalized medicine, and drug discovery. Machine learning models can analyze large amounts of medical data to uncover patterns that were previously difficult to identify, enabling doctors to make more informed decisions. The future of AI in healthcare looks promising, with advancements in natural language processing and image recognition that are already improving patient care and outcomes. As AI continues to evolve, its impact on the healthcare industry will become more profound, leading to better treatments and enhanced patient experiences.', 
+   'https://storage.googleapis.com/staysharp-storage/images-1.jpeg', '2024-11-17T11:45:02Z'),
+  
+  ('Lala Explorer', 'Exploring the World of Quantum Computing', 
+   'Quantum computing is poised to revolutionize the tech industry. In this article, we dive deep into its potential applications, including advancements in cryptography, artificial intelligence, and complex problem-solving. Unlike classical computers, which rely on binary bits, quantum computers use qubits that can exist in multiple states simultaneously, enabling them to perform calculations much faster than conventional machines. Researchers are working on overcoming several technical challenges to make quantum computing practical for real-world use, but the progress being made is promising. As the technology matures, quantum computing could lead to breakthroughs in fields like cybersecurity, optimization problems, and drug discovery, offering unprecedented power for solving problems that are currently intractable with traditional computing methods.',
+   'https://storage.googleapis.com/staysharp-storage/images-2.jpeg', '2024-11-17T12:30:15Z');
