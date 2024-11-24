@@ -17,10 +17,17 @@ const pool = new Pool({
 app.get('/news', async(req, res) => {
   try {
     const result = await pool.query('SELECT * FROM news');
-    res.json(result.rows);
+    res.json({
+      status: 'ok',
+      totalResults: result.rows.length,
+      articles: result.rows,
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({
+      status: 'error',
+      message: 'Internal Server Error',
+    });
   }
 });
 
@@ -30,13 +37,22 @@ app.get('/news/:id', async(req, res) => {
     const result = await pool.query('SELECT * FROM news WHERE id = $1', [id]);
 
     if (result.rows.length > 0) {
-      res.json(result.rows[0]);
+      res.json({
+        status: 'ok',
+        article: result.rows[0],
+      });
     } else {
-      res.status(404).json({ error: 'Article not found' });
+      res.status(404).json({ 
+        status: 'error',
+        message: 'Article Not Found',
+      });
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ 
+      status: 'error',
+      message: 'Internal Server Error',
+    });
   }
 });
 
