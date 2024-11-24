@@ -4,7 +4,7 @@ entrypoint: npm start
 
 env_variables:
   PG_USER: "postgres"
-  PG_HOST: "34.101.191.54"
+  PG_HOST: "34.101.147.98"
   PG_DATABASE: "staysharp_db"
   PG_PASSWORD: ">.X9yV;6^*$l_(?/"
   PG_PORT: "5432"
