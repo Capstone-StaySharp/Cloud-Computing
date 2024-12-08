@@ -103,7 +103,6 @@ export const processBatchImages = async () => {
     return files.length;
   } catch (error) {
     console.error("Image processing error:", error);
-    // Clean up tmp directory in case of error
     if (fs.existsSync("tmp")) {
       fs.rmSync("tmp", { recursive: true, force: true });
     }
