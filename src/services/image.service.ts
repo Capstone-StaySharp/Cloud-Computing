@@ -7,13 +7,14 @@ import dotenv from "dotenv";
 import axios from "axios";
 dotenv.config();
 
+fs.mkdirSync("uploads", { recursive: true });
+
 // Define custom storage configuration
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Files will be stored in 'uploads' directory
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
-    // Create unique filename with original extension
     const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     cb(
       null,
@@ -22,7 +23,7 @@ const storage = multer.diskStorage({
   },
 });
 
-// Define file filter to allow only images
+// Define allowed file extensions
 const fileFilter = (
   req: Request,
   file: Express.Multer.File,
@@ -42,7 +43,7 @@ const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
   limits: {
-    fileSize: 1 * 1024 * 1024, // 1MB file size limit
+    fileSize: 0.5 * 1024 * 1024,
   },
 });
 
@@ -85,7 +86,7 @@ export const processBatchImages = async () => {
     });
 
     const response = await axios.post(
-      `${process.env.BASE_URL}`,
+      `${process.env.BASE_URL}/upload`,
       formData,
       {
         headers: {
@@ -98,9 +99,11 @@ export const processBatchImages = async () => {
     // Step 4: Delete tmp directory
     fs.rmSync("tmp", { recursive: true, force: true });
 
-    // Step 5: Return number of images processed
-    console.log(response.data);
-    return files.length;
+    // Step 5: Return
+    if (response.status !== 200 && response.status !== 201) {
+      return false;
+    }
+    return true;
   } catch (error) {
     console.error("Image processing error:", error);
     if (fs.existsSync("tmp")) {
