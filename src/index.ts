@@ -12,7 +12,8 @@ const app = express();
 
 app.locals.uploadedImageCounter = 0;
 
-export const BATCH_PROCESS_LIMIT = Number(process.env.BATCH_PROCESS_LIMIT) || 24;
+export const BATCH_PROCESS_LIMIT =
+  Number(process.env.BATCH_PROCESS_LIMIT) || 24;
 const NODE_ENV = process.env.NODE_ENV || "dev";
 const APP_PORT = Number(process.env.APP_PORT) || 3000;
 const HOST = NODE_ENV === "prod" ? "0.0.0.0" : "localhost";
@@ -63,14 +64,18 @@ app.post("/upload-image", uploadSingleImage, async (req, res) => {
           is_both_eyes_closed: both_eye_closed,
           is_yawning: yawn,
         },
+        total_image_for_processing: BATCH_PROCESS_LIMIT,
+        total_image_uploaded: totalUploads,
+        remaining_image_for_processing: BATCH_PROCESS_LIMIT - totalUploads,
       });
       return;
     }
 
     res.json({
       success: true,
-      is_model_triggered: false,
       message: "Image uploaded successfully",
+      is_model_triggered: false,
+      data: null,
       total_image_for_processing: BATCH_PROCESS_LIMIT,
       total_image_uploaded: totalUploads,
       remaining_image_for_processing: BATCH_PROCESS_LIMIT - totalUploads,
