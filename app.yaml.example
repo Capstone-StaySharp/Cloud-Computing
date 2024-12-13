@@ -1,0 +1,16 @@
+runtime: nodejs18
+
+entrypoint: npm start
+
+instance_class: F1
+automatic_scaling:
+  min_instances: 1
+  max_instances: 3 
+
+env_variables:
+  PG_USER: <database_user>
+  PG_HOST: <database_connection>
+  PG_DATABASE: <database_name>
+  PG_PASSWORD: <database_password>
+  PG_PORT: <database_port>
+  PORT: <server_port>
