@@ -1,4 +1,8 @@
-# Cloud-Computing
+# Cloud-Computing Documentation
+
+## Environment Variables
+- If you want to test this API in local, you need to rename the `.env.example` file to `.env`. Then fill the environment variables with your own values.
+- If you want to deploy it to App Engine in Google Cloud, you need to rename the `app.yaml.example` file to `app.yaml`. Then fill the environment variables with your own values.
 
 ## API Endpoint
 | Method | Endpoint | Description |
