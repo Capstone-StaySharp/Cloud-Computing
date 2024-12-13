@@ -8,11 +8,11 @@ automatic_scaling:
   max_instances: 3 
 
 env_variables:
-  PG_USER: "postgres"
-  PG_HOST: "/cloudsql/staysharp-442202:asia-southeast2:staysharp-instance"
-  PG_DATABASE: "staysharp_database"
-  PG_PASSWORD: "staysharp012"
-  PG_PORT: "5432"
-  PORT: "8080"
+  PG_USER: <postgres_user>
+  PG_HOST: <cloudsql_connection>
+  PG_DATABASE: <database_name>
+  PG_PASSWORD: <database_password>
+  PG_PORT: <database_port>
+  PORT: <server_port>
 
-  
+  t about the instance_class?
